@@ -13,6 +13,7 @@ Hotmelt defect dataset
 
 
 **讀取數據Sample Code**
+
 ::
     from datasets import load_hotmelt
     data = load_hotmelt()

@@ -4,6 +4,7 @@ WMT2019 dataset
 **Data Set Characteristics:**
 
     :中英翻譯語料庫:
+    
         - 聯合國數據：uncorpus_v1
         - 維基百科標題：wikititles_v1
         - 新聞評論：newscommentary_v14  
@@ -16,6 +17,7 @@ WMT2019 dataset
     :預建立英文字典: 字典大小：8188
     
     :數據前處理:
+    
         - BOS/EOS: 在example的前後加入BOS, EOS索引值
         - filter: 過濾掉長度超過40的example
         - padding: padded_batch 函式能幫我們將每個batch裡頭的序列都補0到跟當下 batch 裡頭最長的序列一樣長
@@ -57,10 +59,14 @@ WMT2019 dataset
     :Decoder: 輸入的詞嵌入層/位置編碼/N個Decoder layers
     
     :Transfomer: 把Encoder和Decoder串起來
+    
         - 輸入：
+        
             - 英文序列：（batch_size, inp_seq_len）
             - 中文序列：（batch_size, tar_seq_len）
+            
         - 輸出：
+        
             - 生成序列：（batch_size, tar_seq_len, target_vocab_size）
             - 注意權重的 dict
     

@@ -14,6 +14,7 @@
     :number of images: 由於這個專案還在快速POC階段, 所以只有標注了85張照片, 快速驗證成效
     
     :image size:
+    
         - raw image: (2456,2058,3)
         - training image: (224,224,3)
         - raw mask: ((2456,2058,3)
@@ -52,7 +53,7 @@
     :width: 400
 
 
-References
+**References**:
 - 標注工具 labelme (`link1`_)
 - json_to_dataset (`link2_`)
 - UNET++ (`link3`_)

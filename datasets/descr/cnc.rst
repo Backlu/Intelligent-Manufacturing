@@ -4,6 +4,7 @@ CNC dataset
 **Data Set Characteristics::**
 
     :控制器數據欄位:
+    
         - x: X軸機械座標
         - y: y軸機械座標
         - z: z軸機械座標        
@@ -18,6 +19,7 @@ CNC dataset
         - seedtrue: 實際轉速
         
     :震動傳感器欄位:
+    
         - Spindle_S01: ?軸震動 (X or Y ro Z)
         - Spindle_S02: ?軸震動
         - Spindle_S03: ?軸震動
@@ -30,13 +32,15 @@ CNC dataset
     
 **Preprocess & Featureing**
 
-    :判斷刀具使否在加工狀態的規則
+    :判斷刀具使否在加工狀態的規則:
+    
         - feedtrue不為0
         - feedrate = 100
         - feed = 10000
         - z軸持續下降
     
     :傳感器震動數據特徵:
+    
         - time domain vibration rms
         - frequency domain order rms (階次)
         - time-frequency domain wavelet component rms 

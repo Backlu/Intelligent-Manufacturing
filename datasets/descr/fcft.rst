@@ -4,6 +4,7 @@ CNC FCFT dataset
 **Data Set Characteristics::**
 
     :控制器數據欄位:
+    
         - x: X軸機械座標
         - y: y軸機械座標
         - z: z軸機械座標        
@@ -18,6 +19,7 @@ CNC FCFT dataset
         - seedtrue: 實際轉速
         
     :震動傳感器欄位:
+    
         - Spindle_S01: ?軸震動 (X or Y ro Z)
         - Spindle_S02: ?軸震動
         - Spindle_S03: ?軸震動
@@ -25,7 +27,8 @@ CNC FCFT dataset
         - Current_IB: 三相電流
         - Current_IC: 三相電流
         
-    :數據收集日期
+    :數據收集日期:
+    
         - 20180430
         - 20180502
         - 20180503

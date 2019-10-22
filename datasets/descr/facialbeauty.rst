@@ -59,7 +59,7 @@ South China University published a paper and a dataset about “Facial Beauty Pr
     :height: 400
     :width: 400
 
-References
+References:
 - How Attractive Are You in the Eyes of Deep Neural Network? (`link1`_)
 - Facial Beauty Prediction (`link2`_)
 

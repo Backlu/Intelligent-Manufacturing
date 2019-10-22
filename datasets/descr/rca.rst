@@ -3,17 +3,20 @@ RCA dataset
 
 **Data Set Characteristics:**
 
-    :Number of Instances: 
+    :Number of Instances:
+    
         - test: 3468
         - sfc: 3308
         - parts: 16544
         
     :Number of Attributes: 
+    
         - test: 13
         - sfc: 11
         - parts: 11
     
     :Test Attributes information:
+    
         - SN: UUT序號
         - Station: 測試工站
         - Stationcode: 測試工站ID
@@ -29,6 +32,7 @@ RCA dataset
         - ver2: 測試軟體版本號
         
     :SFC Attributes information: 
+    
         - ID: SFC ID
         - SN: 產品序號
         - WO: 工單
@@ -41,7 +45,8 @@ RCA dataset
         - product: 產品名稱
         - floor: 組裝樓層
         
-    :PARTS Attributes information:         
+    :PARTS Attributes information:  
+    
         - ID: SFC ID
         - PARTSN: 物料序號
         - scantime: 掃描barcode時間
@@ -73,6 +78,7 @@ RCA dataset
     :關注Symptom: 從良率最差工站的不良品中，計算Symptom不良數量, 關注不良數量最多的Symptom
     
     :組大表: 分別從三份數據裡面將可分析的人機料欄位放入同一張大表
+    
         - test_df: 測試工站+測試設備
         - sfc_df: 工單號
         - part_df: VendorID, DateCode    
@@ -84,6 +90,7 @@ RCA dataset
     :人機料集中性運算: 大表中每一個欄位都是一項人機料風險因子, 依序計算每一項風險因子的不良品分佈的統計指標
     
     :集中性指標:
+    
         - 不良數量
         - 不良總數
         - 產出數量

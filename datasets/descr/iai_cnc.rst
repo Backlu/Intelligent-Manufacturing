@@ -8,6 +8,7 @@ Foxconn IAI CNC Competition dataset
     :铣切的種類: 這次的比賽應該是平面铣切        
     
     :感測器數據欄位:
+    
         - x方向力量
         - y方向力量
         - z方向力量
@@ -17,11 +18,13 @@ Foxconn IAI CNC Competition dataset
         - 音洩讯号的均方根值
         
     :刀具磨耗量測欄位(每次铣切后的磨损数据):
+    
         - flute1
         - flute2
         - flute3    
     
     :一些额外关于数据采集的信息：
+    
         - 数据收集自一把六毫米碳化钨三刃球型立铣刀
         - 主轴转速是 10400 RPM
         - 料件进给速度是一分钟 1555 毫米 (mm/min)
@@ -45,10 +48,12 @@ Foxconn IAI CNC Competition dataset
     :Rolling Window: 直接整段數據取特徵值(最大, 最小, etc.), 很容易受到outlier影響, 所以這邊採用rolling-window將數據分割成N塊計算特徵值, 再從N個特徵值取平均
     
     :時域特徵:
+    
         - 平均值, 標準差, 最大, 最小, 最大與最小的差距
         - 一階變化率的 平均值, 標準差, 最大, 最小, 最大與最小的差距
     
     :頻域特徵:
+    
         - 主要頻率174, 374, 521的震幅 
         - 主要頻率的左邊頻率173, 373, 523的震幅 
         - 主要頻率的右邊頻率175, 375, 522的震幅 
@@ -58,7 +63,8 @@ Foxconn IAI CNC Competition dataset
 
 **Model Characteristics**
 
-    - xgboost
+    :xgboost:
+    
         - 基於Gradient boosting的優化版本
         - 優化损失函数, 減少訓練過程中的過擬合(over-fitting)
         - 引入很多工程上的优化，例如支持并行计算、提高计算效率、处理稀疏训练数据等等。
@@ -68,6 +74,7 @@ Foxconn IAI CNC Competition dataset
 **Hyperparameter Configuration**  
 
     :xgboost模型的訓練超參數:
+    
         - max_depth=5
         - reg_lambda=0.9
         - learning_rate=0.03
@@ -76,6 +83,7 @@ Foxconn IAI CNC Competition dataset
         - colsample_bytree=0.9
         
     :在預測階段的手動調整:
+    
         - 頻域的特徵在200左右突然往上抖升, 所以200後的預測值嘗試用max版模型的model預測結果
         - 對預測的磨耗值平滑化(moving average, window size=5)
         - 可洗切次數在磨耗限制60~70時陡升, 嘗試使用後面兩期修正lag(-2)
