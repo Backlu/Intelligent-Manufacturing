@@ -24,6 +24,7 @@
 **讀取數據Sample Code**
 
 ::
+
     data = load_ADS_generator()
     tr_fen = data.dataGenerator
     funs = Bunch(fillmeangray=fillmeangray, imgaugmentation=imgaugmentation, extractDefect=extractDefect)

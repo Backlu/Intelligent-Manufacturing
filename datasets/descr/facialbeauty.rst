@@ -15,6 +15,7 @@ Facial beauty dataset
 **讀取數據Sample Code**
 
 ::
+
     from datasets import load_facialbeauty
     data = load_facialbeauty(qty=1000) 
  

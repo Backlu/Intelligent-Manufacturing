@@ -28,6 +28,7 @@ CNC dataset
 **讀取數據Sample Code**
 
 ::
+
     data = load_cnc()
     
 **Preprocess & Featureing**

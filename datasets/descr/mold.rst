@@ -16,6 +16,7 @@
 **讀取數據Sample Code**
 
 ::
+
     data= load_moldcase()
     c = data.case01_caseinfo
     df_ctr = data.case01_plc

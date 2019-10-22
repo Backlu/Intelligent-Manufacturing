@@ -35,7 +35,9 @@ Foxconn IAI CNC Competition dataset
         
         
 **讀取數據Sample Code**
+
 ::
+
     from datasets import load_iaicnc
     datasets = load_iaicnc()
 

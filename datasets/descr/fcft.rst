@@ -38,6 +38,7 @@ CNC FCFT dataset
 **讀取數據Sample Code**
 
 ::
+
     data = load_fcft()    
     
     

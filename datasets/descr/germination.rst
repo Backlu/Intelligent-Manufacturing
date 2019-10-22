@@ -15,6 +15,7 @@ Germination dataset
 **讀取數據Sample Code**
 
 ::
+
     from datasets import load_hotmelt
     data = load_germination()
     img = data.data_8k[0]

@@ -15,11 +15,13 @@ Hotmelt defect dataset
 **讀取數據Sample Code**
 
 ::
+
     from datasets import load_hotmelt
     data = load_hotmelt()
     data = data.data
     
 ::
+
     from datasets import load_hotmelt_generator
     data = load_hotmelt_generator()
     imgAug = ImageDataGenerator(
