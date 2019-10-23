@@ -3,9 +3,10 @@
 
 # Copyright © 2019 Hsu Shih-Chieh
 
-import chardet, json, datetime
+import chardet, json, datetime, os
 from nptdms import TdmsFile
 import pandas as pd 
+
 
 def checkencoding(fname):
     with open(fname, 'rb') as f:
@@ -47,5 +48,4 @@ class MCase(object):
         self.evt_str, self.evt_end = casecfg['idx_evt'], casecfg['idx_evt2']
         self.mid = casecfg['machine']
         self.cname = casecfg['cname']
-        
         

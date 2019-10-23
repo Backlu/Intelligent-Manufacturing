@@ -30,6 +30,7 @@ from PIL import Image, ImageEnhance
 from skimage.filters import try_all_threshold, threshold_mean, threshold_local, threshold_minimum, threshold_otsu
 import segmentation_models as sm
 from collections import Counter, defaultdict
+from functools import partial
 
 def load_facialbeauty(img_width=350, img_height=350, qty=None):
     """
@@ -856,4 +857,68 @@ def load_moldcase(caseid = ['case01','case02']):
         bunch[f'{cid}_hv']=df_hv
         bunch[f'{cid}_caseinfo'] = case
     return bunch
+
+
+def load_motoranchordata(get_random_data, preprocess_true_boxes):
+    """
+    專案：馬達定位點
+    Load and return hotmelt ROI dataset description file (train.txt)
+    這個function只讀取train.txt, 並回傳內容, 實際抓取數據在img_hotmelt_ROI.ipynb裡面的generator實作
+    .. versionadded:: 20191009
+
+    Parameters:
+
+    Returns:
+        data : Bunch, dictionary like data 
+            - training image generator
+            - validataion image generator
+        
+    Example:
+        data = load_hotmeltyolodata()
+    """        
+    def data_generator(annotation_lines, batch_size, input_shape, anchors, num_classes):
+        '''data generator for fit_generator'''
+        n = len(annotation_lines)
+        i = 0
+        while True:
+            image_data = []
+            box_data = []
+            for b in range(batch_size):
+                if i==0:
+                    np.random.shuffle(annotation_lines)
+                image, box = get_random_data(annotation_lines[i], input_shape, random=True)
+                image_data.append(image)
+                box_data.append(box)
+                i = (i+1) % n
+            image_data = np.array(image_data)
+            box_data = np.array(box_data)
+            y_true = preprocess_true_boxes(box_data, input_shape, anchors, num_classes)
+            yield [image_data, *y_true], np.zeros(batch_size) 
+            
+    module_path=dirname(__file__)
+    path = join(module_path, 'images/motorAnchorpoint/train.txt')    
+    
+    with open(join(module_path,'descr', 'motorAnchor.rst')) as rst_file:
+        fdescr = rst_file.read()   
+        
+    with open(path) as f:
+        lines = f.readlines()    
+    
+    anchors_str= '10,13,  16,30,  33,23,  30,61,  62,45,  59,119,  116,90,  156,198,  373,326'
+    anchors = np.array([float(x) for x in anchors_str.split(',')]).reshape(-1, 2)
+    data_generator_simple = partial(data_generator,  batch_size=10, input_shape=(416,416), anchors=anchors, num_classes=1)    
+    
+    val_split = 0.1
+    np.random.seed(10101)
+    np.random.shuffle(lines)
+    np.random.seed(None)
+    num_val = int(len(lines)*val_split)
+    num_train = len(lines) - num_val    
+    
+    gen_tr = data_generator_simple(lines[:num_train])    
+    gen_val = data_generator_simple(lines[num_train:])    
+    
+    #bunch = Bunch(generator_tr=gen_tr, generator_val=gen_val, DESCR=fdescr)  
+    bunch = Bunch(generator_tr=gen_tr, generator_val=gen_val, num_train=num_train, num_val=num_val, batch_size=10, num_classes=1, DESCR=fdescr)
+    return bunch 
 

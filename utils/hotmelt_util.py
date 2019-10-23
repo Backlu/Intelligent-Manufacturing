@@ -78,6 +78,7 @@ class YOLOV3(object):
         self.anchors = np.array([float(x) for x in anchors_str.split(',')]).reshape(-1, 2)
         self.sess = K.get_session()
         self.boxes, self.scores, self.classes = self.generate()
+        self.model_path=
 
 
     def generate(self):
@@ -89,7 +90,8 @@ class YOLOV3(object):
         num_classes = len(self.class_names)
         is_tiny_version = num_anchors==6 # default setting
         self.yolo_model = yolo_body(Input(shape=(None,None,3)), 3, 1)
-        self.yolo_model.load_weights('model/hotmelt_yolov3weight.h5') # make sure model, anchors and classes match
+        #self.yolo_model.load_weights('model/hotmelt_yolov3weight.h5') # make sure model, anchors and classes match
+        self.yolo_model.load_weights(model_path) # make sure model, anchors and classes match
 
         print('{} model, anchors, and classes loaded.'.format(model_path))
 

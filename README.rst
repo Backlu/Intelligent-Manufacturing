@@ -37,6 +37,8 @@
     
     :load_germination: 植物工廠的發芽率辨識數據
     
+    :load_motoranchordata: 馬達定位點影像
+    
     :load_rca: 良率異常集中性分析數據 
     
     :load_transformer: 中英文翻譯的數據newscommentary_v14
@@ -51,6 +53,8 @@
     
     :load_mold: 成型機案例數據
     
+
+    
    
 **Sample Code:**
 
@@ -63,6 +67,8 @@
     :img_germination.ipynb: 植物工廠的發芽率計算
     
     :img_ads.ipync: 絕緣片瑕疵檢測(UNET)
+    
+    :img_motoranchor: 馬達定位點偵測(yolov3)
     
     :text_transformer.ipynb: 中英翻譯的Transformer實作(Self-Attention)
     
@@ -87,7 +93,7 @@
     
 **TODO List**
     - CAICT CNC 刀具壽命預測(XGBOOST) 
-    - 成型機健康值 PCA T2/SPE
+    - 成型機健康值 PCA T2/SPE 
     - COF導電粒子檢測 (沒有Source Code QQ)
     - 平穩性檢定(等Ida弄好)
     
