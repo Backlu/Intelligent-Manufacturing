@@ -859,6 +859,35 @@ def load_moldcase(caseid = ['case01','case02']):
     return bunch
 
 
+def load_oee():
+    """
+    專案：成型機PHM案例數據
+    
+    .. versionadded:: 20191023
+
+    Parameters:
+       
+    Returns:
+        data : Bunch, dictionary like data 
+            - spcdata: 控制器數據
+            - lightstatus: 燈號狀態
+    Example:
+        data = load_oee()
+    """           
+    module_path=dirname(__file__)
+    spcdata = pd.read_csv(join(module_path, 'data/mold/spcdata.csv'))
+    spcdata['dt']= spcdata['timestamp'].map(lambda x: datetime.datetime.fromtimestamp(x))
+    ligutstatusdata = pd.read_csv(join(module_path, 'data/mold/lightstatusdata.csv'))
+    ligutstatusdata['dt']= ligutstatusdata['timestamp'].map(lambda x: datetime.datetime.fromtimestamp(x))
+    spccol_mapping = json.load(open(join(module_path, 'data/mold/spccol_mapping.json'), 'r'))
+    with open(join(module_path,'descr', 'oee.rst')) as rst_file:
+        fdescr = rst_file.read()       
+        
+    bunch=Bunch( spcdata=spcdata, ligutstatusdata=ligutstatusdata, spccol_mapping=spccol_mapping, DESCR=fdescr)
+    return bunch
+
+
+
 def load_motoranchordata(get_random_data, preprocess_true_boxes):
     """
     專案：馬達定位點

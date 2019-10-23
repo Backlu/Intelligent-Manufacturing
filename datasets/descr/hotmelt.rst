@@ -79,6 +79,7 @@ Hotmelt defect dataset
     :height: 400
     :width: 400
 
+
 現場的照片類別數量並不平衡, 訓練資料的類別數量比例如下圖所示
 
 ..  image:: img/hotmelt_classcnt.png

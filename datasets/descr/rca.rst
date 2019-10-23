@@ -111,16 +111,20 @@ RCA dataset
     :width: 500
 
 Issue: 
-    - Issue:
-        - SFC_ID和SN一樣, 無法用不同的SFC_ID辨識維修前後的物料, 不過可以用時間先後順序辨識最新組裝物料
-        - SFC_ID和SN一樣, 所以SFC這張表沒有用?
+    
+    - SFC_ID和SN一樣, 無法用不同的SFC_ID辨識維修前後的物料, 不過可以用時間先後順序辨識最新組裝物料
+        
+    - SFC_ID和SN一樣, 所以SFC這張表沒有用?
 
     - Test_Data可用欄位：測試工站+測試設備
+    
     - SFC_Data可用欄位：WO
+    
     - PART_Data可用欄位：part+partsn, part+opid
 
 
 Reference:
+
 - 集中性分析筆記 (`link1`_)
 
 

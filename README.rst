@@ -53,9 +53,10 @@
     
     :load_mold: 成型機案例數據
     
-
+    :load_oee: 成型機OEE數據
     
-   
+
+
 **Sample Code:**
 
     :img_facialbeauty.ipynb: 顏值判斷的模型訓練與推論
@@ -80,7 +81,7 @@
     
     :data_fcft.ipynb: CNC主軸異常偵測 (FCFT)
     
-    :data_molding_TrendAnalysis.ipync: 成型機案例分類(參數變化趨勢分析)
+    :data_molding_TrendAnalysis.ipynb: 成型機案例分類(參數變化趨勢分析)
     
     :data_molding_DTW.ipynb: 成型機案例分類(DTW)
     
@@ -90,12 +91,17 @@
     
     :data_molding_MAD.ipynb: 成型機異常偵測(MAD)
     
+    :data_iee.ipynb: 成型機OEE
+    
     
 **TODO List**
     - CAICT CNC 刀具壽命預測(XGBOOST) 
     - 成型機健康值 PCA T2/SPE 
-    - COF導電粒子檢測 (沒有Source Code QQ)
+    - COF導電粒子檢測 
     - 平穩性檢定(等Ida弄好)
+    - B次的SMT專案 可視化部分
+    - Text Mining
+
     
     
     

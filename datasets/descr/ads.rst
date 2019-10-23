@@ -55,10 +55,15 @@
 
 
 **References**:
+
 - 標注工具 labelme (`link1`_)
+
 - json_to_dataset (`link2_`)
+
 - UNET++ (`link3`_)
+
 - segmentation tools (`link4`_)
+
 
 .. _link1: https://github.com/wkentaro/labelme
 .. _link2: https://github.com/wkentaro/labelme/blob/master/labelme/cli/json_to_dataset.py

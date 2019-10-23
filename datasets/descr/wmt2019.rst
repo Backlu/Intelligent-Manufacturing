@@ -99,11 +99,14 @@ WMT2019 dataset
 
  
 專案說明：
+
 自注意力機制, Transformer實作
 
 
 Reference:
+
 - 李宏毅 Transformer (`link2`_)
+
 - LeeMeng Transformer實作 (`link1`_)
 
 .. _link2: https://youtu.be/ugWDIIOHtPA
