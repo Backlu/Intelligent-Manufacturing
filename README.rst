@@ -59,40 +59,40 @@
 
 **Sample Code:**
 
-    :img_facialbeauty.ipynb: 顏值判斷的模型訓練與推論
+    :img_facialbeauty.ipynb: `顏值判斷的模型訓練與推論 <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_facialbeauty.ipynb>`_
     
-    :img_hotmelt_ROI.ipynb: 十字彈片瑕疵檢測專案的ROI擷取模型訓練與推論 (yolov3)
+    :img_hotmelt_ROI.ipynb: `十字彈片瑕疵檢測專案的ROI擷取模型訓練與推論 (yolov3) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_hotmelt_ROI.ipynb>`_
     
-    :img_hotmelt.ipynb: 十字彈片瑕疵檢測專案的瑕疵分類模型訓練與推論 (densenet169)
+    :img_hotmelt.ipynb: `十字彈片瑕疵檢測專案的瑕疵分類模型訓練與推論 (densenet169) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_hotmelt.ipynb>`_
     
-    :img_germination.ipynb: 植物工廠的發芽率計算
+    :img_germination.ipynb: `植物工廠的發芽率計算 <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_germination.ipynb>`_
     
-    :img_ads.ipync: 絕緣片瑕疵檢測(UNET)
+    :img_ads.ipync: `絕緣片瑕疵檢測(UNET) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_ads.ipynb>`_
     
-    :img_motoranchor: 馬達定位點偵測(yolov3)
+    :img_motoranchor: `馬達定位點偵測(yolov3) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_motoranchor.ipynb>`_
     
-    :text_transformer.ipynb: 中英翻譯的Transformer實作(Self-Attention)
+    :text_transformer.ipynb: `中英翻譯的Transformer實作(Self-Attention) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/text_transformer.ipynb>`_
     
-    :data_rca.ipynb: 生產測試不良品的集中性計算
+    :data_rca.ipynb: `生產測試不良品的集中性計算 <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/data_rca.ipynb>`_
         
-    :data_iaicnc.ipynb: 2018 Foxconn IAI CNC競賽的實作(xgboost)
+    :data_iaicnc.ipynb: `2018 Foxconn IAI CNC競賽的實作(xgboost) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/data_iaicnc.ipynb>`_
     
-    :data_cnc.ipynb: CNC刀具磨耗值預估(GMM)
+    :data_cnc.ipynb: `CNC刀具磨耗值預估(GMM) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/data_cnc.ipynb>`_
     
-    :data_fcft.ipynb: CNC主軸異常偵測 (FCFT)
+    :data_fcft.ipynb: `CNC主軸異常偵測 (FCFT) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/data_fcft.ipynb>`_
     
-    :data_molding_TrendAnalysis.ipynb: 成型機案例分類(參數變化趨勢分析)
+    :data_molding_TrendAnalysis.ipynb: `成型機案例分類(參數變化趨勢分析) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/data_molding_TrendAnalysis.ipynb>`_
     
-    :data_molding_DTW.ipynb: 成型機案例分類(DTW)
+    :data_molding_DTW.ipynb: `成型機案例分類(DTW) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/data_molding_DTW.ipynb>`_
     
-    :data_molding_apriori.ipynb: 成型機案例分類(關聯規則)
+    :data_molding_apriori.ipynb: `成型機案例分類(關聯規則) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/data_molding_apriori.ipynb>`_
     
-    :data_molding_SVM.ipynb: 成型機案例分類(SVM)
+    :data_molding_SVM.ipynb: `成型機案例分類(SVM) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/data_molding_SVM.ipynb>`_
     
-    :data_molding_MAD.ipynb: 成型機異常偵測(MAD)
+    :data_molding_MAD.ipynb: `成型機異常偵測(MAD) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/data_molding_MAD.ipynb>`_
     
-    :data_iee.ipynb: 成型機OEE
-    
+    :data_oee.ipynb: `成型機OEE <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/data_oee.ipynb>`_
+     
     
 **TODO List**
     - CAICT CNC 刀具壽命預測(XGBOOST) 
