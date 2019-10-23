@@ -78,8 +78,6 @@ class YOLOV3(object):
         self.anchors = np.array([float(x) for x in anchors_str.split(',')]).reshape(-1, 2)
         self.sess = K.get_session()
         self.boxes, self.scores, self.classes = self.generate()
-        self.model_path=
-
 
     def generate(self):
         model_path = os.path.expanduser(self.model_path)
