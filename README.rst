@@ -39,6 +39,8 @@
     
     :load_motoranchordata: 馬達定位點影像
     
+    :load_cofroi: COF導電粒子影像
+    
     :load_rca: 良率異常集中性分析數據 
     
     :load_transformer: 中英文翻譯的數據newscommentary_v14
@@ -70,6 +72,8 @@
     :img_ads.ipync: `絕緣片瑕疵檢測(UNET) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_ads.ipynb>`_
     
     :img_motoranchor: `馬達定位點偵測(yolov3) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_motoranchor.ipynb>`_
+    
+    :img_cofroi: `COF導電粒子偵測(影像處理) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_cofroi.ipynb>`_
     
     :text_transformer.ipynb: `中英翻譯的Transformer實作(Self-Attention) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/text_transformer.ipynb>`_
     
