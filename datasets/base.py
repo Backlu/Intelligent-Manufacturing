@@ -31,6 +31,7 @@ from skimage.filters import try_all_threshold, threshold_mean, threshold_local, 
 import segmentation_models as sm
 from collections import Counter, defaultdict
 from functools import partial
+import more_itertools as mit
 
 def load_facialbeauty(img_width=350, img_height=350, qty=None):
     """
@@ -949,5 +950,51 @@ def load_motoranchordata(get_random_data, preprocess_true_boxes):
     
     #bunch = Bunch(generator_tr=gen_tr, generator_val=gen_val, DESCR=fdescr)  
     bunch = Bunch(generator_tr=gen_tr, generator_val=gen_val, num_train=num_train, num_val=num_val, batch_size=10, num_classes=1, DESCR=fdescr)
+    return bunch
+
+
+def load_cofroi():
+    """
+    專案：COF Pin ROI Detection
+    Load and return COF Image
+    .. versionadded:: 20191024
+
+    Parameters:
+
+    Returns:
+        data : Bunch, dictionary like data 
+            - COF Image
+            - config 
+        
+    Example:
+        data = load_cofroi()
+    """        
+    cfg = Bunch(zone_visible_lehgth = 360, 
+                pix_value_thld1 = 127, 
+                pix_value_thld2 = 65, 
+                pix_value_thld3 = 55, 
+                pin_height_thld_UB = 10, 
+                pin_height_thld_LB = 7, 
+                lower_red=np.array([0,0,200]), 
+                upper_red=np.array([50,50,255]), 
+                candidate_particle_count=30, 
+                re_height=5, 
+                re_width=5, 
+                re_height_half=2, 
+                re_width_half=2,)   
+    
+    module_path=dirname(__file__)
+    with open(join(module_path,'descr', 'cof.rst')) as rst_file:
+        fdescr = rst_file.read()   
+        
+    cofimgpath = join(module_path, 'images/cof/Modeling/00_Modeling_Source/20190501/08.jpg')
+    labeledimgpath = join(module_path, 'images/cof/Modeling/00_Microscope/20190501/08.png')
+    
+    cofimg = cv2.imread(cofimgpath)
+    labeledimg = cv2.imread(labeledimgpath)
+    bunch = Bunch(cofimg=cofimg, labeledimg=labeledimg, cfg=cfg, DESCR=fdescr)    
     return bunch 
+
+#data = load_motoranchordata()
+
 

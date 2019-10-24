@@ -12,3 +12,4 @@ from .base import load_fcft
 from .base import load_moldcase
 from .base import load_motoranchordata
 from .base import load_oee
+from .base import load_cofroi
