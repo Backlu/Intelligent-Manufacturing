@@ -73,7 +73,7 @@
     
     :img_motoranchor: `馬達定位點偵測(yolov3) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_motoranchor.ipynb>`_
     
-    :img_cofroi: `COF導電粒子偵測(影像處理) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_cof.ipynb>`_
+    :img_cofroi: `導電粒子偵測(影像處理) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_cof.ipynb>`_
     
     :text_transformer.ipynb: `中英翻譯的Transformer實作(Self-Attention) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/text_transformer.ipynb>`_
     
