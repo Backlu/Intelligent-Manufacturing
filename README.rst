@@ -39,7 +39,7 @@
     
     :load_motoranchordata: 馬達定位點影像
     
-    :load_cofroi: COF導電粒子影像
+    :load_cofroi: 導電粒子影像
     
     :load_rca: 良率異常集中性分析數據 
     
@@ -101,7 +101,6 @@
 **TODO List**
     - CAICT CNC 刀具壽命預測(XGBOOST) 
     - 成型機健康值 PCA T2/SPE 
-    - COF導電粒子檢測 
     - 平穩性檢定(等Ida弄好)
     - B次的SMT專案 可視化部分
     - Text Mining

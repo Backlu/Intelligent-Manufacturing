@@ -8,7 +8,7 @@
     :labeled image: 用高倍數顯微定標註導電粒子的影像檔
     
     
-..  image:: img/cof.png
+..  image:: img/COF.jpeg
     :height: 500
     :width: 500
 
@@ -115,7 +115,7 @@
     :Step 3: 測試模型的準確率
     
 
-..  image:: cofperformance.png
+..  image:: img/cofperformance.png
     :height: 500
     :width: 500
 
