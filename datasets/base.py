@@ -953,7 +953,7 @@ def load_motoranchordata(get_random_data, preprocess_true_boxes):
     return bunch
 
 
-def load_cofroi():
+def load_cofsample():
     """
     專案：COF Pin ROI Detection
     Load and return COF Image
@@ -967,7 +967,7 @@ def load_cofroi():
             - config 
         
     Example:
-        data = load_cofroi()
+        data = load_cofsample()
     """        
     cfg = Bunch(zone_visible_lehgth = 360, 
                 pix_value_thld1 = 127, 
@@ -995,6 +995,137 @@ def load_cofroi():
     bunch = Bunch(cofimg=cofimg, labeledimg=labeledimg, cfg=cfg, DESCR=fdescr)    
     return bunch 
 
-#data = load_motoranchordata()
 
+def load_cof():
+    """
+    專案：COF Pin Particle Detection
+    Load and return COF Image
+    .. versionadded:: 20191025
+
+    Parameters:
+
+    Returns:
+        data : Bunch, dictionary like data 
+            - particle_imgs
+            - particle_label 
+            - config 
+            - descr
+        
+    Example:
+        data = load_cof()
+    """        
+    def getfixpoint(pin, img_s, pin_column_start):
+        '''
+        找到PIN的起始位置
+        '''
+        tmp = list(map(lambda x: (img_s[pin.row_start-3,pin_column_start+x,0] <= cfg.pix_value_thld3), range(30)))
+        fixpoint=0
+        if np.array(tmp).any():
+            fixpoint= np.where(tmp)[0][0]
+        return fixpoint
+
+    def getcenterx(contour):
+        '''
+        透過moments計算輪廓的空間矩, 其中輪廓的重心為m10/m00
+        '''
+        M = cv2.moments(contour)
+        ret = (M["m00"], int(M["m10"] / M["m00"])) if M["m00"] != 0 else (0,0)
+        return ret
+
+    cfg = Bunch(zone_visible_lehgth = 360, 
+                pix_value_thld1 = 127, 
+                pix_value_thld2 = 65, 
+                pix_value_thld3 = 55, 
+                pin_height_thld_UB = 10, 
+                pin_height_thld_LB = 7, 
+                lower_red=np.array([0,0,200]), 
+                upper_red=np.array([50,50,255]), 
+                candidate_particle_count=30, 
+                re_height=5, 
+                re_width=5, 
+                re_height_half=2, 
+                re_width_half=2,)   
+    
+    module_path=dirname(__file__)
+    with open(join(module_path,'descr', 'cof.rst')) as rst_file:
+        fdescr = rst_file.read()   
+        
+    particle_label=[]
+    particle_imgs=[]
+    source_dir = join(module_path, 'images/cof/Modeling/00_Modeling_Source')
+    for datefolder in glob.glob(os.path.join(source_dir,'*')):
+        for imgfile in glob.glob(os.path.join(datefolder,'*.jpg')):
+            img_file_path_source_s = imgfile
+            img_file_path_source_mc = img_file_path_source_s.replace('00_Modeling_Source','00_Microscope').replace('.jpg','.png')
+
+            ## Step1 確認每一根Pin的高度位置與它所在的圖檔路徑
+            img_s = cv2.imread(img_file_path_source_s)
+            img_mc = cv2.imread(img_file_path_source_mc)
+            height,width = img_s.shape[:2]
+            img_1 = img_s[:, int(width*0.3):int(width*0.4), 0] #先切一部分的pin圖像
+            avg_y = np.average(img_1,axis=1) #水平方向取平均灰度值
+            row_idxs = np.where(avg_y>=cfg.pix_value_thld1)[0] #平均灰度值有大於pix_value_thld1門檻的X位置 (pin的顏色較淺, 所以灰度值較高, 透過門檻值找到pin的y軸位置)
+            row_idx_lst = [list(group) for group in mit.consecutive_groups(row_idxs)] #群集出每一根Pin的高度範圍 (找出連續的y軸位置, 連續的一段y軸表示一根pin)
+            valid_pins = filter(lambda x: (len(x)<=cfg.pin_height_thld_UB) & (len(x)>=cfg.pin_height_thld_LB), row_idx_lst) #找出合格的pin (高度在預定義的規格內)
+            pins = list(map(lambda x: Bunch(pid_id=x[0], row_start=x[1][0], row_end=x[1][-1], height=len(x[1])) , enumerate(valid_pins))) #把每一根pin的資訊儲存在pins內
+
+            ## Step2 確認每一根Pin的長度位置
+            pin_golden = pins[1] #只取第二根Pin的圖像為基準,來決定出所有Pin的長度的結束位置
+            img_1 = img_s[pin_golden.row_start:pin_golden.row_end+1, int(width*0.33):int(width*0.55), 0]
+            min_x = np.min(img_1,axis=0) #垂直方向取最小灰度值, 因為pin比較亮, 當灰度值低於門檻時, 表示為pin的結束位置
+            pin_column_end = int(width*0.33) + np.where(min_x >= cfg.pix_value_thld2)[0].max() #決定Pin長度的結束位置
+            pin_column_start = pin_column_end - cfg.zone_visible_lehgth + 1 #決定Pin長度的開始位置
+
+            ## Step3 修正pin起始位置
+            update_lengths = list(map(lambda pin: getfixpoint(pin, img_s, pin_column_start), pins))
+            update_length = max(update_lengths,key=update_lengths.count)
+            pin_column_start = pin_column_start + update_length
+            for pin in pins:
+                pin.col_start, pin.col_end, pin.width = pin_column_start, pin_column_end, pin_column_end-pin_column_start+1
+
+            ## Step 4 偵測在Pin上的顯微鏡已標註粒子位置
+            for pin in pins:
+                pin_img_mc = img_mc[pin.row_start:pin.row_end+1,pin.col_start:pin.col_end+1]               
+                pin_img_m_red = cv2.inRange(pin_img_mc, cfg.lower_red, cfg.upper_red) # 在Pin的ROI有效區域內,搜尋出藍點在哪裡
+
+                _, contours, __ = cv2.findContours(pin_img_m_red,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE) #找出每個標示紅點的輪廓    
+                microscope_particles = list(map(lambda c: getcenterx(c), contours)) #找到輪廓重心的x座標
+                microscope_particles = list(filter(lambda x: x[0]>0, microscope_particles)) #篩選面積>0的輪廓
+                microscope_particles = list(map(lambda x:x[1],microscope_particles))
+                microscope_particles = sorted(set(microscope_particles))    
+                microscope_particles_count = len(microscope_particles)
+
+                ## Step 5 算法偵測在Pin上的具有候選資格的粒子位置
+                pin_img = img_s[pin.row_start:pin.row_end+1,pin.col_start:pin.col_end+1,0].copy() #取出每根Pin的ROI有效區域所構成的圖像
+                pin_img_height, pin_img_width = pin_img.shape
+                #將Pin圖像切分成6段,調整每段的灰度值-->平均值調整為128
+                pi=0
+                for i in np.linspace(0,pin_img_width,7):
+                    if i==0:
+                        continue
+                    i=int(i)
+                    pin_img_adjust = int(np.mean(pin_img[:,pi:i]))-128
+                    pin_img[:,pi:i] = (pin_img[:,pi:i]-pin_img_adjust).clip(0, 255)                      
+                    pi=i
+                f_max = np.max(pin_img,axis=0) #在垂直方向取灰度最大值
+                candidate_particles = sorted(f_max.argsort()[-cfg.candidate_particle_count:])#挑出X軸灰度值最大的前30個粒子為候選資格粒子
+                candidate_particles = list(filter(lambda cp: (2 <= cp)&( cp <= pin_img_width-2), candidate_particles))
+                candidate_particles_y = list(map(lambda cp: np.argmax(pin_img[:,cp]), candidate_particles)) # 候選資格的粒子的y軸位置
+
+                ## Step 6 比對候選粒子與標注粒子
+                if microscope_particles_count > 0:
+                    for cpx, cpy in zip(candidate_particles, candidate_particles_y):
+                        wl= min(max(0, cpx - cfg.re_height_half), pin_img_width-cfg.re_width)
+                        wr = min(max(2*cfg.re_width_half, cpx + cfg.re_width_half), pin_img_width-1)
+                        ht=min(max(0, cpy - cfg.re_height_half), pin_img_height-cfg.re_height)
+                        hb=min(max(2*cfg.re_height_half, cpy + cfg.re_height_half), pin_img_height-1)
+
+                        particle_img = pin_img[ht:hb+1,wl:wr+1]
+                        particle_imgs.append(particle_img.flatten()) #將候選粒子5x5小圖拉瓶構成一向量
+                        isparticles = list(map(lambda x: (x<=cpx+4) & (x>=cpx-4), microscope_particles))
+                        is_particle = int(np.array(isparticles).any())
+                        particle_label.append(is_particle)
+        
+    bunch = Bunch(particle_imgs=particle_imgs, particle_label=particle_label, cfg=cfg, DESCR=fdescr)    
+    return bunch 
 

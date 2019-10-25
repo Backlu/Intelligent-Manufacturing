@@ -1,4 +1,4 @@
-COF dataset
+導電粒子 Dataset
 ---------------------------
 
 **Data Set Characteristics::**
@@ -8,19 +8,22 @@ COF dataset
     :labeled image: 用高倍數顯微定標註導電粒子的影像檔
     
     
+..  image:: img/cof.png
+    :height: 500
+    :width: 500
 
 **讀取數據Sample Code**
 
 ::
 
-    data=load_cofroi()
-
+    data_sample=load_cofsample()
+    data=load_cof()
 
 **Configutation**
 
-    :img_id_lower: 在一個COF圖像資料夾內需要分析的圖像範圍, img_id_lower <= 圖檔名稱
+    :img_id_lower: 在一個導電粒子圖像資料夾內需要分析的圖像範圍, img_id_lower <= 圖檔名稱
 
-    :img_id_upper: 在一個COF圖像資料夾內需要分析的圖像範圍, 圖檔名稱 <= img_id_upper
+    :img_id_upper: 在一個導電粒子圖像資料夾內需要分析的圖像範圍, 圖檔名稱 <= img_id_upper
 
     :zone_visible_lehgth: Pin的ROI有效區域的長度(以pixel為單位)
 
@@ -45,7 +48,7 @@ COF dataset
     :re_width: 候選粒子影像的大小(5x5)
 
 
-**ROI擷取步驟**
+**第一階段: 擷取候選導電粒子(影像處理)**
 
     :一. 擷取PIN:
     
@@ -97,16 +100,32 @@ COF dataset
                 - 將候選粒子擴展為候選粒子小圖: 以候選粒子的(x位置,y位置)為中心,擴展2個pixel,構成候選粒子小圖(size=5x5)
 
 
+**第二階段: 進一步判斷導電粒子真偽(機器學習)**
+
+    :Step 1: 讀取所有照片的候選粒子與標注粒子, 並將數據分成三份:
     
-**Model Characteristics**
+        - training data set: 80%
+        - validation data set: 10%
+        - testing data set: 10%      
+    
+    :Step 2: 訓練一個xgboost classifier
+    
+        - XGBClassifier(learning_rate=0.1, n_estimators=1000, scale_pos_weight=0.25)
+    
+    :Step 3: 測試模型的準確率
+    
 
-
-**Training Hyperparameter**  
+..  image:: cofperformance.png
+    :height: 500
+    :width: 500
 
 
 
 專案說明：  
-COF導電粒子計算
+導電粒子計算, 偵測的方法分為兩個步驟, 第一個步驟用影像處理的方法找出候選的導電粒子, 接著透過高倍率顯微鏡標注的影像當作訓練資料, 在第二步驟時用機器學習的方法訓練一個導電粒子的分類器, 提高導電粒子的判斷準確度
 
 
+**TODO**
+
+- 目前候選導電粒子有部分重疊, 可以用IOU的方法去除重疊區域過大的候選粒子
 
