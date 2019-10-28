@@ -69,7 +69,7 @@
     
     :img_germination.ipynb: `植物工廠的發芽率計算 <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_germination.ipynb>`_
     
-    :img_ads.ipync: `絕緣片瑕疵檢測(UNET) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_ads.ipynb>`_
+    :img_ads.ipync: `絕緣片瑕疵檢測(UNET) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_ads_generator.ipynb>`_
     
     :img_motoranchor: `馬達定位點偵測(yolov3) <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/img_motoranchor.ipynb>`_
     
@@ -97,8 +97,15 @@
     
     :data_oee.ipynb: `成型機OEE <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/data_oee.ipynb>`_
      
+**Tutorial:**    
+
+    :影像處理入門: `gist <https://gist.github.com/Backlu/9ede58397083e747a6627c5014189fae>`_
     
+    :震動訊號分析入門: <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/tutorial/vibration_analysis.ipynb>`_
+
+
 **TODO List**
+
     - CAICT CNC 刀具壽命預測(XGBOOST) 
     - 成型機健康值 PCA T2/SPE 
     - 平穩性檢定(等Ida弄好)
