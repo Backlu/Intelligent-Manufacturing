@@ -101,7 +101,7 @@
 
     :影像處理入門: `gist <https://gist.github.com/Backlu/9ede58397083e747a6627c5014189fae>`_
     
-    :震動訊號分析入門: <https://nbviewer.jupyter.org/github/Backlu/Intelligent-Manufacturing/blob/master/tutorial/vibration_analysis.ipynb>`_
+    :震動訊號分析入門: `gist <https://gist.github.com/Backlu/ca62dd41f7c4d6ea54d8e690d7f4e9bc>`_
 
 
 **TODO List**
